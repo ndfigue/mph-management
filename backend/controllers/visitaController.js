@@ -1,7 +1,8 @@
-const { Visita, Usuario, Unidad } = require('../models');
+// controllers/visitaController.js
+const { Visita, Usuario } = require('../models');
 const qrcode = require('qrcode');
 
-// Crear una visita con un código QR mejorado
+// Crear una visita
 const crearVisita = async (req, res) => {
   const { usuarioId, nombreVisitante, unidadId } = req.body;
 
@@ -29,4 +30,43 @@ const crearVisita = async (req, res) => {
     console.error(error);
     res.status(500).json({ mensaje: 'Error al crear la visita' });
   }
+};
+
+// Obtener todas las visitas
+const obtenerVisitas = async (req, res) => {
+  try {
+    const visitas = await Visita.findAll({ include: Usuario });
+    res.status(200).json(visitas);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: 'Error al obtener las visitas' });
+  }
+};
+
+// Validar una visita (usando el código QR)
+const validarVisita = async (req, res) => {
+  const { codigoQR } = req.body;
+
+  try {
+    const visita = await Visita.findOne({ where: { codigoQR } });
+    if (!visita) {
+      return res.status(404).json({ mensaje: 'Visita no encontrada' });
+    }
+
+    if (visita.estado === 'expirada') {
+      return res.status(400).json({ mensaje: 'La visita ha expirado' });
+    }
+
+    res.status(200).json({ mensaje: 'Visita válida', visita });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: 'Error al validar la visita' });
+  }
+};
+
+// Exportar funciones
+module.exports = {
+  crearVisita,
+  obtenerVisitas,
+  validarVisita,
 };

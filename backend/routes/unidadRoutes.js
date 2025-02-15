@@ -8,6 +8,7 @@ const {
   eliminarUnidad,
 } = require('../controllers/unidadController');
 
+console.log(autenticarUsuario);
 const router = express.Router();
 
 // Rutas protegidas

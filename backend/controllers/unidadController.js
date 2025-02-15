@@ -65,8 +65,6 @@ const eliminarUnidad = async (req, res) => {
   }
 };
 
-console.log('Exportando obtenerUnidades:', obtenerUnidades); // Debería imprimir la función
-
 // Exportar funciones
 module.exports = {
   obtenerUnidades,

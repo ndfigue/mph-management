@@ -7,7 +7,8 @@ const {
   obtenerVisitas,
   validarVisita,
 } = require('../controllers/visitaController');
-
+console.log(autenticarUsuario);
+console.log(obtenerVisitas);
 const router = express.Router();
 
 // Validaciones para crear una visita

@@ -21,4 +21,5 @@ const autenticarUsuario = (req, res, next) => {
   }
 };
 
-module.exports = autenticarUsuario;
+// Exportar el middleware
+module.exports = { autenticarUsuario };

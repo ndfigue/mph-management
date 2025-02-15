@@ -1,9 +1,9 @@
 // config/firebase.js
 const admin = require('firebase-admin');
-const serviceAccount = require('./firebase-credentials.json'); // Archivo de credenciales
+//const serviceAccount = require('./firebase-credentials.json'); // Archivo de credenciales
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+//admin.initializeApp({
+//  credential: admin.credential.cert(serviceAccount),
+//});
 
-module.exports = admin;
+//module.exports = admin;
